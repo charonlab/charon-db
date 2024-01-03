@@ -13,7 +13,7 @@ namespace Abyss\DBAL\Query;
 
 use InvalidArgumentException;
 use Abyss\DBAL\FetchMode;
-use Abyss\Stdlib\Collections\CollectionInterface;
+use Nulldark\Stdlib\Collections\CollectionInterface;
 
 /**
  * SQL Query Builder with fluid interface SQL.

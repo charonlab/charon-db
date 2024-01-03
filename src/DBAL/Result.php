@@ -11,8 +11,8 @@
 
 namespace Abyss\DBAL;
 
-use Abyss\Stdlib\Collections\Collection;
-use Abyss\Stdlib\Collections\CollectionInterface;
+use Nulldark\Stdlib\Collections\Collection;
+use Nulldark\Stdlib\Collections\CollectionInterface;
 
 /**
  * @author Dominik Szamburski

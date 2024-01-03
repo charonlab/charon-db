@@ -10,7 +10,7 @@
   ],
   "require": {
     "ext-pdo": "*",
-    "nulldark/collection": "^2.0.0"
+    "nulldark/stdlib": "^2.0.0"
   },
   "require-dev": {
     "nulldark/devtools": "dev-master"
