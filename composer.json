@@ -1,7 +1,7 @@
 {
-  "name": "abyss/dbal",
-  "description": "DBAL Component",
-  "license": "LGPL-2.1-only",
+  "name": "abyss/database",
+  "description": "Database Component",
+  "license": "MIT",
   "authors": [
     {
       "name": "Dominik Szamburski",
