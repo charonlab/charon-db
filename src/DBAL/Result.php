@@ -1,23 +1,12 @@
 <?php
 
-/**
- * Copyright (C) 2023 Dominik Szamburski
+/*
+ * This file is part of the abyss/database.
  *
- * This file is part of abyss/dbal
+ * Copyright (C) 2023-2024 Dominik Szamburski
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE.md file for details.
  */
 
 namespace Abyss\DBAL;
@@ -81,7 +70,7 @@ final class Result
     /**
      * Returns a collection containing all the result rows represented as numeric arrays.
      *
-     * @return \Abyss\Stdlib\Collections\CollectionInterface
+     * @return \Nulldark\Stdlib\Collections\CollectionInterface
      */
     public function fetchAllNumeric(): CollectionInterface
     {
@@ -91,7 +80,7 @@ final class Result
     /**
      *  Returns a collection containing all the result rows represented as associative arrays.
      *
-     * @return \Abyss\Stdlib\Collections\CollectionInterface
+     * @return \Nulldark\Stdlib\Collections\CollectionInterface
      */
     public function fetchAllAssociative(): CollectionInterface
     {
@@ -101,7 +90,7 @@ final class Result
     /**
      * Returns a collection containing all the result rows represented as objects.
      *
-     * @return \Abyss\Stdlib\Collections\CollectionInterface
+     * @return \Nulldark\Stdlib\Collections\CollectionInterface
      */
     public function fetchAllObject(): CollectionInterface
     {
@@ -111,7 +100,7 @@ final class Result
     /**
      * Returns a collection containing the values of the first column of the result.
      *
-     * @return \Abyss\Stdlib\Collections\CollectionInterface
+     * @return \Nulldark\Stdlib\Collections\CollectionInterface
      */
     public function fetchFirstColumn(): CollectionInterface
     {
@@ -149,7 +138,7 @@ final class Result
 
     /**
      * @param \Abyss\DBAL\FetchMode $mode
-     * @return \Abyss\Stdlib\Collections\CollectionInterface
+     * @return \Nulldark\Stdlib\Collections\CollectionInterface
      */
     private function fetchAll(FetchMode $mode): CollectionInterface
     {
