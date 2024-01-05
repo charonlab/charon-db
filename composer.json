@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Abyss\\DBAL\\": "src/DBAL/"
+      "Abyss\\Db\\": "src/"
     }
   },
   "autoload-dev": {
