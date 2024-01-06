@@ -13,6 +13,12 @@
         <testsuite name="unit test">
             <directory>./tests/unit</directory>
         </testsuite>
+        <testsuite name="integration test">
+            <directory>./tests/integration</directory>
+        </testsuite>
+        <testsuite name="performance test">
+            <directory>./tests/performance</directory>
+        </testsuite>
     </testsuites>
 
     <source restrictDeprecations="true" restrictNotices="true" restrictWarnings="true">

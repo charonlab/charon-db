@@ -22,7 +22,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Abyss\\Test\\Unit\\": "tests/unit/"
+      "Abyss\\Test\\Unit\\": "tests/unit/",
+      "Abyss\\Test\\Integration\\": "tests/integration/",
+      "Abyss\\Test\\Performance\\": "tests/performance/"
     }
   },
   "config": {
