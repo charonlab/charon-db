@@ -74,14 +74,17 @@ class Connection
     /**
      * Initializes a new instance of the Connection class.
      *
-     * @param Params $params The connection parameters.
+     * @param Params $params  The connection parameters.
+     * @param ?Driver $driver The driver instance.
      */
     public function __construct(
-        #[\SensitiveParameter] array $params
+        #[\SensitiveParameter]
+        array $params,
+        Driver $driver = null
     ) {
         $this->params = $params;
 
-        $this->driver = $this->createDriver($params['driver']);
+        $this->driver = $driver ?: $this->createDriver($params['driver']);
         $this->profiler = new Profiler();
     }
 
