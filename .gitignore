@@ -6,3 +6,5 @@ vendor/
 
 phpcs.xml
 phpunit.xml
+
+memory
