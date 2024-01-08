@@ -1,41 +1,13 @@
-## abyss/dbal
+## abyss/abyss-db
 
-The DataBase Abstract Layer providing a fluent query and other many features. It currently supports MySQL, Postgres 
-and SQLite based on PDO. 
+The abyss-db is Database Abstraction Layer offers an object-oriented API.
 
-### WARNING
-NOTE: The library is under development, the API is currently taking shape but there should be no breaking changes. 
-It is currently not recommended to use on production!
+## Documentation
 
-### Usage Instructions
+Documentation is at [docs](docs/index.md)
 
-First, create new Connection.
-```php
-$connection = new \Abyss\DBAL\Connection([
-    'driver' => 'mysql',
-    'dsn' => 'mysql:host=127.0.0.1;dbname=foo',
-    'username' => 'root',
-    'password' => 'password',
-]);
-```
+## License
 
-**Using The Query Builder**
-```php
-$results = $connection->getQueryBuilder()
-    ->select('*')
-    ->from('table')
-    ->where('id', '>', 3)
-    ->get();
-```
+The abyss-db is open-sourced software licensed under the [MIT](LICENSE.md)
 
-**Using The Core Methods**
-```php
-// Simple Query
-$results = $connection->query('SELECT id FROM table WHERE id = 1')
-    ->fetchAllObject();
 
-// Prepared Statements
-$stmt = $connection->prepare('SELECT id FROM table WHERE id = ?')->execute();
-$results = $stmt->execute()
-    ->fetchAllObject();
-```
