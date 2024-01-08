@@ -2,6 +2,11 @@
   "name": "abyss/abyss-db",
   "description": "Database Component",
   "license": "MIT",
+  "keywords": [
+    "dal",
+    "db",
+    "dbal"
+  ],
   "authors": [
     {
       "name": "Dominik Szamburski",
@@ -15,6 +20,7 @@
   "require-dev": {
     "nulldark/devtools": "dev-master"
   },
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "Abyss\\Db\\": "src/"
@@ -22,18 +28,17 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Abyss\\Test\\Unit\\": "tests/unit/",
       "Abyss\\Test\\Integration\\": "tests/integration/",
-      "Abyss\\Test\\Performance\\": "tests/performance/"
+      "Abyss\\Test\\Performance\\": "tests/performance/",
+      "Abyss\\Test\\Unit\\": "tests/unit/"
     }
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true,
-      "nulldark/devtools": true
+      "nulldark/devtools": true,
+      "phpstan/extension-installer": true
     },
     "sort-packages": true
-  },
-  "minimum-stability": "dev"
+  }
 }
