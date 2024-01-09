@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the abyss/database.
+ * This file is part of the abyss/abyss-db.
  *
  * Copyright (C) 2023-2024 Abyss Development Team
  *
