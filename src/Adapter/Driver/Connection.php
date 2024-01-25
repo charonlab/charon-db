@@ -1,15 +1,15 @@
 <?php
 
 /*
- * This file is part of the abyss/abyss-db.
+ * This file is part of the charonlab/charon-db.
  *
- * Copyright (C) 2023-2024 Abyss Development Team
+ * Copyright (C) 2023-2024 Charon Lab Development Team
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Abyss\Db\Adapter\Driver;
+namespace Charon\Db\Adapter\Driver;
 
 interface Connection
 {
@@ -19,7 +19,7 @@ interface Connection
      * @param string $sql
      *  The SQL string to be preparing.
      *
-     * @return \Abyss\Db\Adapter\Driver\Statement
+     * @return \Charon\Db\Adapter\Driver\Statement
      *  Returns a prepared statement.
      */
     public function prepare(string $sql): Statement;
@@ -30,7 +30,7 @@ interface Connection
      * @param string $sql
      *  The SQL string to be executing.
      *
-     * @return \Abyss\Db\Adapter\Driver\Result
+     * @return \Charon\Db\Adapter\Driver\Result
      */
     public function query(string $sql): Result;
 

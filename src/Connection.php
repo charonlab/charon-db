@@ -1,28 +1,28 @@
 <?php
 
 /*
- * This file is part of the abyss/abyss-db.
+ * This file is part of the Copyright (C) 2023-2024 Charon Lab Development Team
  *
- * Copyright (C) 2023-2024 Abyss Development Team
+ * Copyright (C) 2023-2024 Charon Lab Development Team
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Abyss\Db;
+namespace Charon\Db;
 
-use Abyss\Db\Adapter\Driver\Connection as DriverConnection;
-use Abyss\Db\Adapter\Driver\Driver;
-use Abyss\Db\Adapter\Driver\Statement;
-use Abyss\Db\Adapter\Exception\MissingOptionException;
-use Abyss\Db\Adapter\Exception\NoActiveTransactionException;
-use Abyss\Db\Adapter\Exception\QueryException;
-use Abyss\Db\Adapter\Exception\UnsupportedDriverException;
-use Abyss\Db\Adapter\Profiler\Profiler;
-use Abyss\Db\Adapter\Profiler\ProfilerInterface;
-use Abyss\Db\Adapter\ResultSet;
-use Abyss\Db\Adapter\ResultSetInterface;
-use Abyss\Db\Sql\ParameterType;
+use Charon\Db\Adapter\Driver\Connection as DriverConnection;
+use Charon\Db\Adapter\Driver\Driver;
+use Charon\Db\Adapter\Driver\Statement;
+use Charon\Db\Adapter\Exception\MissingOptionException;
+use Charon\Db\Adapter\Exception\NoActiveTransactionException;
+use Charon\Db\Adapter\Exception\QueryException;
+use Charon\Db\Adapter\Exception\UnsupportedDriverException;
+use Charon\Db\Adapter\Profiler\Profiler;
+use Charon\Db\Adapter\Profiler\ProfilerInterface;
+use Charon\Db\Adapter\ResultSet;
+use Charon\Db\Adapter\ResultSetInterface;
+use Charon\Db\Sql\ParameterType;
 
 /**
  * Connection class is a High Level of abstraction at top of Driver.
@@ -52,7 +52,7 @@ class Connection
     /**
      * The driver instance.
      *
-     * @var \Abyss\Db\Adapter\Driver\Driver $driver
+     * @var \Charon\Db\Adapter\Driver\Driver $driver
      */
 
     protected Driver $driver;
@@ -60,14 +60,14 @@ class Connection
     /**
      * The driver connection.
      *
-     * @var \Abyss\Db\Adapter\Driver\Connection|null $connection
+     * @var \Charon\Db\Adapter\Driver\Connection|null $connection
      */
     private ?DriverConnection $connection = null;
 
     /**
      * The profiler instance.
      *
-     * @var \Abyss\Db\Adapter\Profiler\ProfilerInterface $profiler
+     * @var \Charon\Db\Adapter\Profiler\ProfilerInterface $profiler
      */
     protected ProfilerInterface $profiler;
 
@@ -91,7 +91,7 @@ class Connection
     /**
      * Gets a query profiler.
      *
-     * @return \Abyss\Db\Adapter\Profiler\ProfilerInterface
+     * @return \Charon\Db\Adapter\Profiler\ProfilerInterface
      */
     public function getProfiler(): ProfilerInterface
     {
@@ -104,7 +104,7 @@ class Connection
      * @param string $sql
      *  The SQL string to be preparing.
      *
-     * @return \Abyss\Db\Adapter\Driver\Statement
+     * @return \Charon\Db\Adapter\Driver\Statement
      *  Returns a prepared statement.
      */
     public function prepare(string $sql): Statement
@@ -120,14 +120,14 @@ class Connection
      * @param list<mixed>|array<string, mixed> $bindings
      *  An array of values with as many elements as there are bound parameters in the SQL statement being executed.
      *
-     * @return \Abyss\Db\Adapter\ResultSetInterface
+     * @return \Charon\Db\Adapter\ResultSetInterface
      */
     public function query(string $sql, array $bindings = []): ResultSetInterface
     {
         /**
          * @param string $sql
          * @param list<mixed>|array<string, mixed> $bindings
-         * @return \Abyss\Db\Adapter\ResultSetInterface
+         * @return \Charon\Db\Adapter\ResultSetInterface
          */
         $executor = function (string $sql, array $bindings): ResultSetInterface {
             if (\count($bindings) > 0) {
@@ -229,7 +229,7 @@ class Connection
     /**
      * Bind values to their parameters in the given statement.
      *
-     * @param \Abyss\Db\Adapter\Driver\Statement $stmt
+     * @param \Charon\Db\Adapter\Driver\Statement $stmt
      * @param list<mixed>|array<string, mixed> $values
      *
      * @return void
@@ -288,11 +288,11 @@ class Connection
      * @param ?string $driver
      *  A driver name.
      *
-     * @return \Abyss\Db\Adapter\Driver\Driver
+     * @return \Charon\Db\Adapter\Driver\Driver
      *  Returns a new Driver instance.
      *
-     * @throws \Abyss\Db\Adapter\Exception\MissingOptionException
-     * @throws \Abyss\Db\Adapter\Exception\UnsupportedDriverException
+     * @throws \Charon\Db\Adapter\Exception\MissingOptionException
+     * @throws \Charon\Db\Adapter\Exception\UnsupportedDriverException
      */
     private function createDriver(?string $driver): Driver
     {

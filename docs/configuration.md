@@ -1,14 +1,14 @@
 # Configuration
 
-`Abyss\Db\Connection` is the central point of the abyss-db component.
+`Charon\Db\Connection` is the central point of the charon-db component.
 This is a high-level API that is responsible for customizing the code and providing 
 a common interface to the target vendor databases. To do so,
-it creates a new Driver in the `Abyss\Db\Adapter\Driver` namespace using the `Abyss\Db\Adapter\Driver\Connection`, 
-`Abyss\Db\Adapter\Driver\Driver`, `Abyss\Db\Adapter\Driver\Result`, and `Abyss\Db\Adapter\Driver\Statement` interfaces.
+it creates a new Driver in the `Charon\Db\Adapter\Driver` namespace using the `Charon\Db\Adapter\Driver\Connection`, 
+`Charon\Db\Adapter\Driver\Driver`, `Charon\Db\Adapter\Driver\Result`, and `Charon\Db\Adapter\Driver\Statement` interfaces.
 
 ## Getting connection
 
-You can create a connection by instantiating the `Abyss\Db\Connection` and pass an array of configuration.
+You can create a connection by instantiating the `Charon\Db\Connection` and pass an array of configuration.
 
 
 | Key      | Is required? | Value                   | Description                               |
@@ -25,19 +25,19 @@ $params = [
     'dsn' => 'sqlite::memory:',    
 ];
 
-$connection = new \Abyss\Db\Connection($params);
+$connection = new \Charon\Db\Connection($params);
 ```
 
 Another example, of a MySQL connection via PDO:
 ```php
 $params = [
     'driver' => 'pdo',
-    'dsn' => 'mysql:host=127.0.0.1;dbname=abyss',
-    'username' => 'abyss',
-    'password' => 'abyss',
+    'dsn' => 'mysql:host=127.0.0.1;dbname=charon',
+    'username' => 'charon',
+    'password' => 'charon',
 ];
 
-$connection = new \Abyss\Db\Connection($params);
+$connection = new \Charon\Db\Connection($params);
 ```
 
 

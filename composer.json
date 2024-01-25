@@ -1,6 +1,6 @@
 {
-  "name": "abyss/abyss-db",
-  "description": "Database Component",
+  "name": "charonlab/charon-db",
+  "description": "The database Component",
   "license": "MIT",
   "keywords": [
     "dal",
@@ -23,14 +23,14 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "Abyss\\Db\\": "src/"
+      "Charon\\Db\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Abyss\\Test\\Integration\\": "tests/integration/",
-      "Abyss\\Test\\Performance\\": "tests/performance/",
-      "Abyss\\Test\\Unit\\": "tests/unit/"
+      "Charon\\Test\\Integration\\": "tests/integration/",
+      "Charon\\Test\\Performance\\": "tests/performance/",
+      "Charon\\Test\\Unit\\": "tests/unit/"
     }
   },
   "config": {

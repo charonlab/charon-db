@@ -2,9 +2,9 @@
 <ruleset
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
-    name="Abyss coding standard"
+    name="Charon coding standard"
 >
-    <description>Abyss coding standard</description>
+    <description>Charon Coding Standard</description>
 
     <arg name="extensions" value="php"/>
     <arg name="parallel" value="80"/>

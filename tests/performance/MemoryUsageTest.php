@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the abyss/abyss-db.
+ * This file is part of the charonlab/charon-db.
  *
- * Copyright (C) 2023-2024 Abyss Development Team
+ * Copyright (C) 2023-2024 Charon Lab Development Team
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Abyss\Test\Performance;
+namespace Charon\Test\Performance;
 
-use Abyss\Db\Connection;
+use Charon\Db\Connection;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;

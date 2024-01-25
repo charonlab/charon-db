@@ -1,6 +1,6 @@
-## abyss/abyss-db
+## charon/charon-db
 
-The abyss-db is Database Abstraction Layer offers an object-oriented API.
+The charon-db is a Database Abstraction Layer offers an object-oriented API.
 
 ## Documentation
 
@@ -8,6 +8,6 @@ Documentation is at [docs](docs/index.md)
 
 ## License
 
-The abyss-db is open-sourced software licensed under the [MIT](LICENSE.md)
+The charon-db is open-sourced software licensed under the [MIT](LICENSE.md)
 
 

@@ -1,17 +1,17 @@
 <?php
 
 /*
- * This file is part of the abyss/abyss-db.
+ * This file is part of the charonlab/charon-db.
  *
- * Copyright (C) 2023-2024 Abyss Development Team
+ * Copyright (C) 2023-2024 Charon Lab Development Team
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Abyss\Db\Adapter\Driver;
+namespace Charon\Db\Adapter\Driver;
 
-use Abyss\Db\Sql\ParameterType;
+use Charon\Db\Sql\ParameterType;
 
 interface Statement
 {
@@ -20,7 +20,7 @@ interface Statement
      *
      * @param int|string $param
      * @param mixed $value
-     * @param \Abyss\Db\Sql\ParameterType $type
+     * @param \Charon\Db\Sql\ParameterType $type
      *
      * @return void
      */
@@ -31,7 +31,7 @@ interface Statement
     ): void;
 
     /**
-     * @return \Abyss\Db\Adapter\Driver\Result
+     * @return \Charon\Db\Adapter\Driver\Result
      *  Returns result sets.
      */
     public function execute(): Result;

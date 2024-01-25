@@ -1,18 +1,18 @@
 <?php
 
 /*
- * This file is part of the abyss/abyss-db.
+ * This file is part of the charonlab/charon-db.
  *
- * Copyright (C) 2023-2024 Abyss Development Team
+ * Copyright (C) 2023-2024 Charon Lab Development Team
  *
  * This software may be modified and distributed under the terms
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Abyss\Db\Adapter\Profiler;
+namespace Charon\Db\Adapter\Profiler;
 
 /**
- * @psalm-import-type QueryLog from \Abyss\Db\Adapter\Profiler\ProfilerInterface
+ * @psalm-import-type QueryLog from \Charon\Db\Adapter\Profiler\ProfilerInterface
  */
 class Profiler implements ProfilerInterface
 {

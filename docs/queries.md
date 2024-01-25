@@ -38,7 +38,7 @@ foreach ($rows as $row) {
 }
 ```
 
-If we pass an array of parameters to the `Abyss\Db\Connection::query()` method, 
+If we pass an array of parameters to the `Charon\Db\Connection::query()` method, 
 it will prepare the query itself and execute it without having to manually use the `bindValue` method.
 
 ```php
@@ -48,10 +48,10 @@ $rows = $connection->query($sql, ['id' => 10]);
 
 The above example will go through the following steps:
 
-- Create a new `Abyss\Db\Adapter\Driver\Statement` instance.
+- Create a new `Charon\Db\Adapter\Driver\Statement` instance.
 - Injects parameters into the query via the `bindValue` method.
-- Execute the `Abyss\Db\Adapter\Driver\Statement` object.
-- Returns `Abyss\Db\Adapter\ResultSetInterface` object.
+- Execute the `Charon\Db\Adapter\Driver\Statement` object.
+- Returns `Charon\Db\Adapter\ResultSetInterface` object.
 
 # Query Execution
 
@@ -59,6 +59,6 @@ In some cases, it is necessary to directly execute instructions without preparat
 As an example of DDL query execution.
 
 ```php
-$sql = 'CREATE DATABASE abyss;';
+$sql = 'CREATE DATABASE charon;';
 $connection->execute($sql);
 ```
