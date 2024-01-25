@@ -22,40 +22,35 @@ final class Result implements ResultInterface
     ) {
     }
 
-    public function setFetchMode(int $fetchMode): void
-    {
+    public function setFetchMode(int $fetchMode): void {
         $this->fetchMode = $fetchMode;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function fetch(): mixed
-    {
+    public function fetch(): mixed {
         return $this->resource->fetch($this->fetchMode);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function fetchAll(): array
-    {
+    public function fetchAll(): array {
         return $this->resource->fetchAll($this->fetchMode);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function rowCount(): int
-    {
+    public function rowCount(): int {
         return $this->resource->rowCount();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function columnCount(): int
-    {
+    public function columnCount(): int {
         return $this->resource->columnCount();
     }
 }

@@ -20,8 +20,7 @@ use PHPUnit\Framework\TestCase;
 class MemoryUsageTest extends TestCase
 {
     #[DoesNotPerformAssertions]
-    public function testMemoryUsage()
-    {
+    public function testMemoryUsage() {
         $connection = new Connection([
             'driver' => 'pdo',
             'dsn' => 'sqlite:memory'

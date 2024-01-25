@@ -25,8 +25,7 @@ final readonly class Connection implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function query(string $sql): ResultInterface
-    {
+    public function query(string $sql): ResultInterface {
         $stmt =  $this->connection->query($sql);
 
         \assert($stmt instanceof \PDOStatement);
@@ -39,8 +38,7 @@ final readonly class Connection implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function prepare(string $sql): StatementInterface
-    {
+    public function prepare(string $sql): StatementInterface {
         $stmt = $this->connection->prepare($sql);
 
         \assert($stmt instanceof \PDOStatement);
@@ -53,32 +51,28 @@ final readonly class Connection implements ConnectionInterface
     /**
      * {@inheritDoc}
      */
-    public function beginTransaction(): bool
-    {
+    public function beginTransaction(): bool {
         return $this->connection->beginTransaction();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function commit(): bool
-    {
+    public function commit(): bool {
         return $this->connection->commit();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function rollback(): bool
-    {
+    public function rollback(): bool {
         return $this->connection->rollBack();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function execute(string $sql): int|string
-    {
+    public function execute(string $sql): int|string {
         $result = $this->connection->exec($sql);
 
         \assert($result !== false);

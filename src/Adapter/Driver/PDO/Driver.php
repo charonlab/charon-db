@@ -19,8 +19,7 @@ final readonly class Driver implements DriverInterface
     /**
      * {@inheritDoc}
      */
-    public function connect(#[\SensitiveParameter] array $params): ConnectionInterface
-    {
+    public function connect(#[\SensitiveParameter] array $params): ConnectionInterface {
         $options = $params['options'] ?? [];
 
         if (!isset($options['persistent'])) {

@@ -14,11 +14,14 @@
     }
   ],
   "require": {
+    "php": "~8.2.0 || ~8.3.0",
     "ext-pdo": "*",
     "nulldark/stdlib": "^2.0.0"
   },
   "require-dev": {
-    "nulldark/devtools": "dev-master"
+    "charonlab/coding-standard": "1.2.x-dev",
+    "phpunit/phpunit": "^11.0@dev",
+    "vimeo/psalm": "^0.3.14"
   },
   "minimum-stability": "dev",
   "autoload": {
@@ -35,10 +38,14 @@
   },
   "config": {
     "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true,
-      "nulldark/devtools": true,
-      "phpstan/extension-installer": true
+      "dealerdirect/phpcodesniffer-composer-installer": true
     },
     "sort-packages": true
+  },
+  "scripts": {
+    "lint-check": "phpcs",
+    "lint-fix": "phpcbf",
+    "static-analysis": "psalm --shepherd --stats",
+    "test": "phpunit --colors=always"
   }
 }

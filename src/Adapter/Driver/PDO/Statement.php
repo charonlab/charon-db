@@ -25,8 +25,7 @@ final readonly class Statement implements StatementInterface
     /**
      * {@inheritDoc}
      */
-    public function execute(): ResultInterface
-    {
+    public function execute(): ResultInterface {
         $this->resource->execute();
 
         return new Result(

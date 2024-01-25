@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Copyright (C) 2023-2024 Charon Lab Development Team
+ * This file is part of the charonlab/charon-db.
  *
  * Copyright (C) 2023-2024 Charon Lab Development Team
  *
@@ -93,8 +93,7 @@ class Connection
      *
      * @return \Charon\Db\Adapter\Profiler\ProfilerInterface
      */
-    public function getProfiler(): ProfilerInterface
-    {
+    public function getProfiler(): ProfilerInterface {
         return $this->profiler;
     }
 
@@ -107,8 +106,7 @@ class Connection
      * @return \Charon\Db\Adapter\Driver\Statement
      *  Returns a prepared statement.
      */
-    public function prepare(string $sql): Statement
-    {
+    public function prepare(string $sql): Statement {
         return $this->connect()->prepare($sql);
     }
 
@@ -122,8 +120,7 @@ class Connection
      *
      * @return \Charon\Db\Adapter\ResultSetInterface
      */
-    public function query(string $sql, array $bindings = []): ResultSetInterface
-    {
+    public function query(string $sql, array $bindings = []): ResultSetInterface {
         /**
          * @param string $sql
          * @param list<mixed>|array<string, mixed> $bindings
@@ -147,7 +144,7 @@ class Connection
 
         if (!($results instanceof ResultSetInterface)) {
             $reason = \sprintf(
-                "The return type must be instance of %s interface.",
+                'The return type must be instance of %s interface.',
                 ResultSetInterface::class
             );
 
@@ -157,8 +154,7 @@ class Connection
         return $results;
     }
 
-    public function execute(string $sql, array $bindings = []): int|string
-    {
+    public function execute(string $sql, array $bindings = []): int|string {
         /**
          * @param string $sql
          * @param list<mixed>|array<string, mixed> $bindings
@@ -185,8 +181,7 @@ class Connection
      * @return bool
      *  Returns true if success, otherwise false.
      */
-    public function beginTransaction(): bool
-    {
+    public function beginTransaction(): bool {
         ++$this->transactionNestingLevel;
 
         return $this->connect()->beginTransaction();
@@ -198,8 +193,7 @@ class Connection
      * @return bool
      *  Returns true if success, otherwise false.
      */
-    public function commit(): bool
-    {
+    public function commit(): bool {
         if ($this->transactionNestingLevel === 0) {
             throw new NoActiveTransactionException();
         }
@@ -215,8 +209,7 @@ class Connection
      * @return bool
      *  Returns true if success, otherwise false.
      */
-    public function rollback(): bool
-    {
+    public function rollback(): bool {
         if ($this->transactionNestingLevel === 0) {
             throw new NoActiveTransactionException();
         }
@@ -234,8 +227,7 @@ class Connection
      *
      * @return void
      */
-    public function bindValues(Statement $stmt, array $values): void
-    {
+    public function bindValues(Statement $stmt, array $values): void {
         foreach ($values as $key => $value) {
             $stmt->bindValue(
                 \is_int($key) ? $key + 1 : $key,
@@ -254,8 +246,7 @@ class Connection
      *
      * @return mixed
      */
-    protected function run(string $sql, array $bindings, \Closure $executor): mixed
-    {
+    protected function run(string $sql, array $bindings, \Closure $executor): mixed {
         $this->connect();
 
         $this->profiler->start($sql, $bindings);
@@ -273,8 +264,7 @@ class Connection
         }
     }
 
-    protected function connect(): DriverConnection
-    {
+    protected function connect(): DriverConnection {
         if ($this->connection !== null) {
             return $this->connection;
         }
@@ -294,8 +284,7 @@ class Connection
      * @throws \Charon\Db\Adapter\Exception\MissingOptionException
      * @throws \Charon\Db\Adapter\Exception\UnsupportedDriverException
      */
-    private function createDriver(?string $driver): Driver
-    {
+    private function createDriver(?string $driver): Driver {
         if ($driver === null) {
             throw new MissingOptionException("The option 'driver' is required.");
         }

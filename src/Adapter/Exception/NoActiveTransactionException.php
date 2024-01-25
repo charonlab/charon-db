@@ -13,8 +13,7 @@ namespace Charon\Db\Adapter\Exception;
 
 class NoActiveTransactionException extends \RuntimeException
 {
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct('There is no active transaction.');
     }
 }

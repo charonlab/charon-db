@@ -21,8 +21,7 @@ class InsertPerformanceTest extends TestCase
 {
     protected Connection $connection;
 
-    public function setUp(): void
-    {
+    public function setUp(): void {
         $this->connection = new Connection([
             'driver' => 'pdo',
             'dsn' => 'sqlite::memory:'
@@ -31,16 +30,14 @@ class InsertPerformanceTest extends TestCase
         $this->connection->execute('CREATE TABLE charon(name TEXT);');
     }
 
-    public function tearDown(): void
-    {
+    public function tearDown(): void {
         unset(
             $this->connection
         );
     }
 
     #[DoesNotPerformAssertions]
-    public function testInsertPerformance(): void
-    {
+    public function testInsertPerformance(): void {
         $start = \microtime(true);
 
         echo 'Memory usage before: ' . (\memory_get_usage() / 1024) . ' KB' . PHP_EOL;

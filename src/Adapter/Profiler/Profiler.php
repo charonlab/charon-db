@@ -26,14 +26,13 @@ class Profiler implements ProfilerInterface
     /**
      * {@inheritDoc}
      */
-    public function start(string $sql, array $bindings): self
-    {
+    public function start(string $sql, array $bindings): self {
         $queryLog = [
-           'sql' => $sql,
-           'bindings' => $bindings,
-           'start' => \microtime(true),
-           'end' => 0,
-           'elapse' => 0,
+            'sql' => $sql,
+            'bindings' => $bindings,
+            'start' => \microtime(true),
+            'end' => 0,
+            'elapse' => 0,
         ];
 
         $this->queryLogs[$this->currentIndex] = $queryLog;
@@ -44,11 +43,10 @@ class Profiler implements ProfilerInterface
     /**
      * {@inheritDoc}
      */
-    public function stop(): self
-    {
+    public function stop(): self {
         if (!isset($this->queryLogs[$this->currentIndex])) {
             $reason = \sprintf(
-                "A profiler must be started before %s can be called",
+                'A profiler must be started before %s can be called',
                 __FUNCTION__
             );
 
@@ -70,8 +68,7 @@ class Profiler implements ProfilerInterface
     /**
      * {@inheritDoc}
      */
-    public function getQueryLogs(): array
-    {
+    public function getQueryLogs(): array {
         return $this->queryLogs;
     }
 }

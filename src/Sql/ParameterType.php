@@ -20,8 +20,7 @@ enum ParameterType
     case LARGE_OBJECT;
     case BOOLEAN;
 
-    public static function getType(mixed $value): self
-    {
+    public static function getType(mixed $value): self {
         return match (true) {
             \is_int($value) => ParameterType::INTEGER,
             \is_resource($value) => ParameterType::LARGE_OBJECT,
