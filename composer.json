@@ -1,17 +1,11 @@
 {
   "name": "charonlab/charon-db",
-  "description": "The database Component",
+  "description": "An lightweight database abstraction layer (DBAL) library.",
   "license": "MIT",
   "keywords": [
     "dal",
     "db",
     "dbal"
-  ],
-  "authors": [
-    {
-      "name": "Dominik Szamburski",
-      "email": "dominikszamburski99@gmail.com"
-    }
   ],
   "require": {
     "php": "~8.2.0 || ~8.3.0",
@@ -39,6 +33,10 @@
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "8.2.15"
     },
     "sort-packages": true
   },
