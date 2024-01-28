@@ -6,6 +6,18 @@ The charon-db is a Database Abstraction Layer offers an object-oriented API.
 
 Documentation is at [docs](docs/index.md)
 
+## Installation
+
+Run the following to install this library:
+
+```bash
+$ composer require charonlab/charon-db
+```
+
+## Support
+
+- [Issues](https://github.com/charonlab/charon-db/issues/)
+
 ## License
 
 The charon-db is open-sourced software licensed under the [MIT](LICENSE.md)
