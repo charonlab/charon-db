@@ -22,3 +22,5 @@ phpunit.xml
 phpstan.neon
 .phpcs-cache
 phpcs.xml
+
+memory

@@ -228,6 +228,7 @@ class Connection
      * @return void
      */
     public function bindValues(Statement $stmt, array $values): void {
+        /** @psalm-suppress MixedAssignment */
         foreach ($values as $key => $value) {
             $stmt->bindValue(
                 \is_int($key) ? $key + 1 : $key,

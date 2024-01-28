@@ -12,11 +12,13 @@
 namespace Charon\Test\Performance;
 
 use Charon\Db\Connection;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 #[Group('performance')]
+#[CoversNothing]
 class InsertPerformanceTest extends TestCase
 {
     protected Connection $connection;
