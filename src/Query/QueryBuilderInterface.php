@@ -38,10 +38,38 @@ interface QueryBuilderInterface
      * @param string $column
      * @param int|float|array|string $value
      * @param string $operator
+     * @param string $boolean
      *
      * @return self
      */
-    public function where(string $column, int|float|array|string $value, string $operator = '='): self;
+    public function where(
+        string $column,
+        int|float|array|string $value,
+        string $operator = '=',
+        string $boolean = 'AND'
+    ): self;
+
+    /**
+     * Adds a condition for restrictions to the query result.
+     *
+     * @param string $column
+     * @param int|float|array|string $value
+     * @param string $operator
+     *
+     * @return self
+     */
+    public function orWhere(string $column, int|float|array|string $value, string $operator = '='): self;
+
+    /**
+     * Adds a condition for restrictions to the query result.
+     *
+     * @param string $column
+     * @param int|float|array|string $value
+     * @param string $operator
+     *
+     * @return self
+     */
+    public function andWhere(string $column, int|float|array|string $value, string $operator = '='): self;
 
     /**
      * Adds an inner join to the query.

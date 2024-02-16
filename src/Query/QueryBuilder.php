@@ -91,6 +91,30 @@ class QueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
+    public function orWhere(
+        string $column,
+        string|float|int|array $value,
+        string $operator = '=',
+    ): self {
+        $this->conditions[] = new Condition($column, $value, $operator, 'OR');
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function andWhere(
+        string $column,
+        string|float|int|array $value,
+        string $operator = '=',
+    ): self {
+        $this->conditions[] = new Condition($column, $value, $operator, 'OR');
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function join(string $fromAlias, string $table, string $alias, ?string $on = null): self {
         $this->joins[$fromAlias][] = new Join('INNER', $table, $alias, $on);
         return $this;
