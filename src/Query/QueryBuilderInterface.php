@@ -44,6 +44,43 @@ interface QueryBuilderInterface
     public function where(string $column, int|float|array|string $value, string $operator = '='): self;
 
     /**
+     * Adds an inner join to the query.
+     *
+     * @param string $fromAlias
+     * @param string $table
+     * @param string $alias
+     * @param string|null $on
+     *
+     * @return self
+     */
+    public function join(string $fromAlias, string $table, string $alias, ?string $on = null): self;
+
+    /**
+     * Adds a left join to the query.
+     *
+     * @param string $fromAlias
+     * @param string $table
+     * @param string $alias
+     * @param string|null $on
+     *
+     * @return self
+     */
+    public function leftJoin(string $fromAlias, string $table, string $alias, ?string $on = null): self;
+
+    /**
+     * Adds a right join to the query.
+     *
+     * @param string $fromAlias
+     * @param string $table
+     * @param string $alias
+     * @param string|null $on
+     *
+     * @return self
+     */
+    public function rightJoin(string $fromAlias, string $table, string $alias, ?string $on = null): self;
+
+
+    /**
      * Adds a grouping expression over the result of the query.
      *
      * @param string $column

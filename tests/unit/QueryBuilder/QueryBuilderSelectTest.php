@@ -16,6 +16,7 @@ use Charon\Db\Query\Clause\Column;
 use Charon\Db\Query\Clause\Condition;
 use Charon\Db\Query\Clause\From;
 use Charon\Db\Query\Clause\Group;
+use Charon\Db\Query\Clause\Join;
 use Charon\Db\Query\Clause\Order;
 use Charon\Db\Query\QueryBuilder;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -24,6 +25,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Column::class)]
 #[CoversClass(From::class)]
 #[CoversClass(Condition::class)]
+#[CoversClass(Join::class)]
 #[CoversClass(Group::class)]
 #[CoversClass(Order::class)]
 #[CoversClass(QueryBuilder::class)]
@@ -52,14 +54,14 @@ class QueryBuilderSelectTest extends TestCase
     }
 
     public function testSelectWithAliases(): void {
-       $qb = new QueryBuilder($this->conn);
+        $qb = new QueryBuilder($this->conn);
 
-       $query = $qb
-           ->select('u.id')
-           ->from('users', 'u')
-           ->compile();
+        $query = $qb
+            ->select('u.id')
+            ->from('users', 'u')
+            ->compile();
 
-       self::assertEquals('SELECT u.id FROM users AS u', $query);
+        self::assertEquals('SELECT u.id FROM users AS u', $query);
     }
 
     public function testSelectOrderBy(): void {
@@ -98,4 +100,55 @@ class QueryBuilderSelectTest extends TestCase
         self::assertEquals('SELECT id, name FROM users WHERE id = 1', $query);
     }
 
+    public function testSelectWithLeftJoin(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->leftJoin('u', 'posts', 'p', 'u.id = p.id')
+            ->compile();
+
+        self::assertEquals('SELECT u.id, u.name FROM users AS u LEFT JOIN posts p ON u.id = p.id', $query);
+    }
+
+    public function testSelectWithRightJoin(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->rightJoin('u', 'posts', 'p', 'u.id = p.id')
+            ->compile();
+
+        self::assertEquals('SELECT u.id, u.name FROM users AS u RIGHT JOIN posts p ON u.id = p.id', $query);
+    }
+
+    public function testSelectWithInnerJoin(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->join('u', 'posts', 'p', 'u.id = p.id')
+            ->compile();
+
+        self::assertEquals('SELECT u.id, u.name FROM users AS u INNER JOIN posts p ON u.id = p.id', $query);
+    }
+
+    public function testSelectWithJoinsAndConditions(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->leftJoin('u', 'posts', 'p', 'u.id = p.id')
+            ->where('p.id', 1)
+            ->compile();
+
+        self::assertEquals(
+            'SELECT u.id, u.name FROM users AS u LEFT JOIN posts p ON u.id = p.id WHERE p.id = 1',
+            $query
+        );
+    }
 }

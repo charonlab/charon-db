@@ -14,8 +14,8 @@ namespace Charon\Db\Query\Clause;
 final readonly class From implements \Stringable
 {
     public function __construct(
-        private string  $table,
-        private ?string $alias = null
+        public string  $table,
+        public ?string $alias = null
     ) {
     }
 

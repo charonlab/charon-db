@@ -15,6 +15,7 @@ use Charon\Db\Connection;
 use Charon\Db\Query\Clause\Column;
 use Charon\Db\Query\Clause\Condition;
 use Charon\Db\Query\Clause\Group;
+use Charon\Db\Query\Clause\Join;
 use Charon\Db\Query\Clause\Order;
 use Charon\Db\Query\Clause\From;
 
@@ -28,14 +29,18 @@ class QueryBuilder implements QueryBuilderInterface
     /** @var \Charon\Db\Query\Clause\From[] $tables */
     private array $tables = [];
 
+    /** @var \Charon\Db\Query\Clause\Join[][] $joins */
+    private array $joins = [];
+
     /** @var \Charon\Db\Query\Clause\Condition[] $conditions */
     private array $conditions = [];
+
+    /** @var \Charon\Db\Query\Clause\Group[] $groups */
+    private array $groups = [];
 
     /** @var \Charon\Db\Query\Clause\Order[] $orders */
     private array $orders = [];
 
-    /** @var \Charon\Db\Query\Clause\Group[] $groups */
-    private array $groups = [];
 
     public function __construct(
         protected readonly Connection $connection
@@ -80,6 +85,30 @@ class QueryBuilder implements QueryBuilderInterface
         string $boolean = 'AND'
     ): self {
         $this->conditions[] = new Condition($column, $value, $operator, $boolean);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function join(string $fromAlias, string $table, string $alias, ?string $on = null): self {
+        $this->joins[$fromAlias][] = new Join('INNER', $table, $alias, $on);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function leftJoin(string $fromAlias, string $table, string $alias, ?string $on = null): self {
+        $this->joins[$fromAlias][] = new Join('LEFT', $table, $alias, $on);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function rightJoin(string $fromAlias, string $table, string $alias, ?string $on = null): self {
+        $this->joins[$fromAlias][] = new Join('RIGHT', $table, $alias, $on);
         return $this;
     }
 
@@ -135,7 +164,15 @@ class QueryBuilder implements QueryBuilderInterface
         $parts[] = \implode(', ', $this->columns);
 
         if (\count($this->tables) > 0) {
-            $parts[] = 'FROM ' . \implode(', ', $this->tables);
+            $tables = \array_map(function (From $table) {
+                $reference = ($table->alias === null || $table->alias === $table->table)
+                    ? $table->table
+                    : $table->alias;
+
+                return $table . ' ' . \implode(' ', $this->joins[$reference] ?? []);
+            }, $this->tables);
+
+            $parts[] = \rtrim('FROM ' . \implode(', ', $tables));
         }
 
         if (\count($this->conditions) > 0) {
