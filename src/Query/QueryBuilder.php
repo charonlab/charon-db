@@ -24,7 +24,15 @@ use Charon\Db\Query\Clause\Set;
 class QueryBuilder implements QueryBuilderInterface
 {
     private QueryType $queryType = QueryType::SELECT;
+
+    /** @var bool $distinct */
     private bool $distinct = false;
+
+    /** @var int|null $limit */
+    private ?int $limit = null;
+
+    /** @var int|null $offset */
+    private ?int $offset = null;
 
     /** @var \Charon\Db\Query\Clause\Column[] $columns */
     private array $columns = [];
@@ -115,6 +123,22 @@ class QueryBuilder implements QueryBuilderInterface
      */
     public function distinct(bool $distinct = true): self {
         $this->distinct = $distinct;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function limit(int $limit): self {
+        $this->limit = $limit;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function offset(int $offset): self {
+        $this->offset = $offset;
         return $this;
     }
 
@@ -318,6 +342,14 @@ class QueryBuilder implements QueryBuilderInterface
             $parts[] = 'ORDER BY ' . \implode(', ', $this->orders);
         }
 
+        if ($this->limit !== null) {
+            $parts[] = 'LIMIT ' . $this->limit;
+        }
+
+        if ($this->offset !== null) {
+            $parts[] = 'OFFSET ' . $this->offset;
+        }
+
         return \implode(' ', $parts);
     }
 
@@ -356,6 +388,14 @@ class QueryBuilder implements QueryBuilderInterface
 
         if (\count($this->conditions) > 0) {
             $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+        }
+
+        if ($this->limit !== null) {
+            if (\count($this->orders) > 0) {
+                $parts[] = 'ORDER BY ' . \implode(', ', $this->orders);
+            }
+
+            $parts[] = 'LIMIT ' . $this->limit;
         }
 
         return \implode(' ', $parts);

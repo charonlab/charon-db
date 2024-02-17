@@ -59,6 +59,24 @@ interface QueryBuilderInterface
     public function distinct(bool $distinct = true): self;
 
     /**
+     * Sets a limit on the number of rows.
+     *
+     * @param int $limit
+     *
+     * @return self
+     */
+    public function limit(int $limit): self;
+
+    /**
+     * Sets an offset which rows in datasets to return based on their position.
+     *
+     * @param int $offset
+     *
+     * @return self
+     */
+    public function offset(int $offset): self;
+
+    /**
      * Adds a table to the FROM clause.
      *
      * @param string $table

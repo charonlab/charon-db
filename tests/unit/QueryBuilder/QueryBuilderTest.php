@@ -282,4 +282,52 @@ class QueryBuilderTest extends TestCase
 
         self::assertEquals('UPDATE users SET name = \'John\', surname = \'Doe\' WHERE id = 1', $query);
     }
+
+    public function testSelectWithLimit(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->limit(10)
+            ->compile();
+
+        self::assertEquals('SELECT u.id, u.name FROM users AS u LIMIT 10', $query);
+    }
+
+    public function testSelectWithOffset(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->limit(10)
+            ->offset(1)
+            ->compile();
+
+        self::assertEquals('SELECT u.id, u.name FROM users AS u LIMIT 10 OFFSET 1', $query);
+    }
+
+    public function testDeleteWithLimit(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->delete('users')
+            ->limit(10)
+            ->compile();
+
+        self::assertEquals('DELETE FROM users LIMIT 10', $query);
+    }
+
+    public function testDeleteWithLimitOrder(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->delete('users')
+            ->limit(10)
+            ->orderBy('id', 'DESC')
+            ->compile();
+
+        self::assertEquals('DELETE FROM users ORDER BY id DESC LIMIT 10', $query);
+    }
 }
