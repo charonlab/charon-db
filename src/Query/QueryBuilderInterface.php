@@ -41,6 +41,15 @@ interface QueryBuilderInterface
     public function delete(string $table): self;
 
     /**
+     * Sets a table to be used for UPDATE statement.
+     *
+     * @param string $table
+     *
+     * @return self
+     */
+    public function update(string $table): self;
+
+    /**
      * Sets the query as DISTINCT or not.
      *
      * @param bool $distinct
@@ -188,6 +197,16 @@ interface QueryBuilderInterface
      * @return self
      */
     public function values(array $values): self;
+
+    /**
+     * Sets a new value for a update query.
+     *
+     * @param string $column
+     * @param string $value
+     *
+     * @return self
+     */
+    public function set(string $column, string $value): self;
 
     /**
      * Adds a column to be selected.

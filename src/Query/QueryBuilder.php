@@ -19,6 +19,7 @@ use Charon\Db\Query\Clause\Group;
 use Charon\Db\Query\Clause\Join;
 use Charon\Db\Query\Clause\Order;
 use Charon\Db\Query\Clause\From;
+use Charon\Db\Query\Clause\Set;
 
 class QueryBuilder implements QueryBuilderInterface
 {
@@ -50,6 +51,9 @@ class QueryBuilder implements QueryBuilderInterface
 
     /** @var array<string, mixed> $values */
     private array $values = [];
+
+    /** @var \Charon\Db\Query\Clause\Set[] $sets */
+    private array $sets = [];
 
 
     public function __construct(
@@ -91,6 +95,16 @@ class QueryBuilder implements QueryBuilderInterface
      */
     public function delete(string $table): self {
         $this->queryType = QueryType::DELETE;
+        $this->table = new From($table);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function update(string $table): self {
+        $this->queryType = QueryType::UPDATE;
         $this->table = new From($table);
 
         return $this;
@@ -228,6 +242,14 @@ class QueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
+    public function set(string $column, string $value): self {
+        $this->sets[] = new Set($column, $value);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function addColumn(string $column, ?string $alias = null): string {
         $columnKey = $column . ($alias ?? '');
 
@@ -250,6 +272,7 @@ class QueryBuilder implements QueryBuilderInterface
             QueryType::SELECT => $this->compileSelect(),
             QueryType::INSERT => $this->compileInsert(),
             QueryType::DELETE => $this->compileDelete(),
+            QueryType::UPDATE => $this->compileUpdate(),
         };
     }
 
@@ -322,7 +345,27 @@ class QueryBuilder implements QueryBuilderInterface
         $parts[] = $this->table;
 
         if (\count($this->conditions) > 0) {
-            $parts[] = 'WHERE'. \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+            $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+        }
+
+        return \implode(' ', $parts);
+    }
+
+    /**
+     * Compiles the UPDATE Statement.
+     *
+     * @return string
+     */
+    public function compileUpdate(): string {
+        $parts = ['UPDATE'];
+        $parts[] = $this->table;
+
+        if (\count($this->sets) > 0) {
+            $parts[] = 'SET ' . \implode(', ', $this->sets);
+        }
+
+        if (\count($this->conditions) > 0) {
+            $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
         }
 
         return \implode(' ', $parts);

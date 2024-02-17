@@ -257,4 +257,29 @@ class QueryBuilderTest extends TestCase
 
         self::assertEquals('DELETE FROM users WHERE id = 1', $query);
     }
+
+    public function testSimpleUpdate(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->update('users')
+            ->set('name', "'John'")
+            ->set('surname', "'Doe'")
+            ->compile();
+
+        self::assertEquals('UPDATE users SET name = \'John\', surname = \'Doe\'', $query);
+    }
+
+    public function testUpdateWithWhere(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->update('users')
+            ->set('name', "'John'")
+            ->set('surname', "'Doe'")
+            ->where('id', 1)
+            ->compile();
+
+        self::assertEquals('UPDATE users SET name = \'John\', surname = \'Doe\' WHERE id = 1', $query);
+    }
 }
