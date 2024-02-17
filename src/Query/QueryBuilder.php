@@ -28,6 +28,9 @@ class QueryBuilder implements QueryBuilderInterface
     /** @var \Charon\Db\Query\Clause\Column[] $columns */
     private array $columns = [];
 
+    /** @var \Charon\Db\Query\Clause\From $table */
+    private From $table;
+
     /** @var \Charon\Db\Query\Clause\From[] $tables */
     private array $tables = [];
 
@@ -44,6 +47,9 @@ class QueryBuilder implements QueryBuilderInterface
 
     /** @var \Charon\Db\Query\Clause\Order[] $orders */
     private array $orders = [];
+
+    /** @var array<string, mixed> $values */
+    private array $values = [];
 
 
     public function __construct(
@@ -66,6 +72,13 @@ class QueryBuilder implements QueryBuilderInterface
         foreach ($columns as $column) {
             $this->addColumn($column);
         }
+
+        return $this;
+    }
+
+    public function insert(string $table): self {
+        $this->queryType = QueryType::INSERT;
+        $this->table = new From($table);
 
         return $this;
     }
@@ -194,6 +207,14 @@ class QueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
+    public function values(array $values): self {
+        $this->values = $values;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function addColumn(string $column, ?string $alias = null): string {
         $columnKey = $column . ($alias ?? '');
 
@@ -213,7 +234,8 @@ class QueryBuilder implements QueryBuilderInterface
 
     public function compile(): string {
         return match ($this->queryType) {
-            QueryType::SELECT => $this->compileSelect()
+            QueryType::SELECT => $this->compileSelect(),
+            QueryType::INSERT => $this->compileInsert()
         };
     }
 
@@ -260,5 +282,19 @@ class QueryBuilder implements QueryBuilderInterface
         }
 
         return \implode(' ', $parts);
+    }
+
+    /**
+     * Compiles the INSERT Statement.
+     *
+     * @return string
+     */
+    public function compileInsert(): string {
+        return \sprintf(
+            'INSERT INTO %s (%s) VALUES (%s)',
+            $this->table,
+            \implode(', ', \array_keys($this->values)),
+            \implode(', ', $this->values)
+        );
     }
 }

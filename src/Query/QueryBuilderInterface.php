@@ -163,6 +163,15 @@ interface QueryBuilderInterface
     public function orderBy(string $column, string $direction = 'ASC'): self;
 
     /**
+     * Specifies values for an insert query indexed by column names.
+     *
+     * @param array $values
+     *
+     * @return self
+     */
+    public function values(array $values): self;
+
+    /**
      * Adds a column to be selected.
      *
      * @param string $column
