@@ -327,7 +327,7 @@ class QueryBuilder implements QueryBuilderInterface
      * @return string
      * @throws \LogicException
      */
-    public function compileInsert(): string {
+    private function compileInsert(): string {
         if ($this->table === null) {
             throw new \LogicException('No table specified for INSERT statement');
         }
@@ -346,7 +346,7 @@ class QueryBuilder implements QueryBuilderInterface
      * @return string
      * @throws \LogicException
      */
-    public function compileDelete(): string {
+    private function compileDelete(): string {
         if ($this->table === null) {
             throw new \LogicException('No table specified for INSERT statement');
         }
@@ -367,7 +367,7 @@ class QueryBuilder implements QueryBuilderInterface
      * @return string
      * @throws \LogicException
      */
-    public function compileUpdate(): string {
+    private function compileUpdate(): string {
         if ($this->table === null) {
             throw new \LogicException('No table specified for INSERT statement');
         }
