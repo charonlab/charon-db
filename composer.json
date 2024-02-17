@@ -10,7 +10,7 @@
   "require": {
     "php": "~8.2.0 || ~8.3.0",
     "ext-pdo": "*",
-    "nulldark/stdlib": "^2.0.0"
+    "nuldark/stdlib": "^2.0.0"
   },
   "require-dev": {
     "charonlab/coding-standard": "1.2.x-dev",

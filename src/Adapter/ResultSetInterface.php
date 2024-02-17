@@ -11,12 +11,12 @@
 
 namespace Charon\Db\Adapter;
 
-use Nulldark\Stdlib\Collections\CollectionInterface;
+use Nuldark\Stdlib\Collection;
 
 /**
  * @template V
- * @extends CollectionInterface<V>
+ * @extends Collection<V>
  */
-interface ResultSetInterface extends CollectionInterface
+interface ResultSetInterface extends Collection
 {
 }
