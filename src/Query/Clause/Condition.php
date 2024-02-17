@@ -15,6 +15,7 @@ class Condition implements \Stringable
 {
     public function __construct(
         protected string $column,
+        /** @var int|float|scalar[]|string $value */
         protected string|float|int|array $value,
         protected string $operator = '=',
         protected string $boolean = 'AND'

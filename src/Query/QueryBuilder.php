@@ -29,8 +29,8 @@ class QueryBuilder implements QueryBuilderInterface
     /** @var \Charon\Db\Query\Clause\Column[] $columns */
     private array $columns = [];
 
-    /** @var \Charon\Db\Query\Clause\From $table */
-    private From $table;
+    /** @var null|\Charon\Db\Query\Clause\From $table */
+    private ?From $table = null;
 
     /** @var \Charon\Db\Query\Clause\From[] $tables */
     private array $tables = [];
@@ -49,7 +49,7 @@ class QueryBuilder implements QueryBuilderInterface
     /** @var \Charon\Db\Query\Clause\Order[] $orders */
     private array $orders = [];
 
-    /** @var array<string, mixed> $values */
+    /** @var array<string, scalar> $values */
     private array $values = [];
 
     /** @var \Charon\Db\Query\Clause\Set[] $sets */
@@ -325,8 +325,13 @@ class QueryBuilder implements QueryBuilderInterface
      * Compiles the INSERT Statement.
      *
      * @return string
+     * @throws \LogicException
      */
     public function compileInsert(): string {
+        if ($this->table === null) {
+            throw new \LogicException('No table specified for INSERT statement');
+        }
+
         return \sprintf(
             'INSERT INTO %s (%s) VALUES (%s)',
             $this->table,
@@ -339,8 +344,13 @@ class QueryBuilder implements QueryBuilderInterface
      * Compiles the DELETE Statement.
      *
      * @return string
+     * @throws \LogicException
      */
     public function compileDelete(): string {
+        if ($this->table === null) {
+            throw new \LogicException('No table specified for INSERT statement');
+        }
+
         $parts = ['DELETE FROM'];
         $parts[] = $this->table;
 
@@ -355,8 +365,13 @@ class QueryBuilder implements QueryBuilderInterface
      * Compiles the UPDATE Statement.
      *
      * @return string
+     * @throws \LogicException
      */
     public function compileUpdate(): string {
+        if ($this->table === null) {
+            throw new \LogicException('No table specified for INSERT statement');
+        }
+
         $parts = ['UPDATE'];
         $parts[] = $this->table;
 

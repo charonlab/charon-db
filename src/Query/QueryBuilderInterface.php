@@ -72,7 +72,7 @@ interface QueryBuilderInterface
      * Adds a condition for restrictions to the query result.
      *
      * @param string $column
-     * @param int|float|array|string $value
+     * @param int|float|scalar[]|string $value
      * @param string $operator
      * @param string $boolean
      *
@@ -89,7 +89,7 @@ interface QueryBuilderInterface
      * Adds a condition for restrictions to the query result.
      *
      * @param string $column
-     * @param int|float|array|string $value
+     * @param int|float|scalar[]|string $value
      * @param string $operator
      *
      * @return self
@@ -100,7 +100,7 @@ interface QueryBuilderInterface
      * Adds a condition for restrictions to the query result.
      *
      * @param string $column
-     * @param int|float|array|string $value
+     * @param int|float|scalar[]|string $value
      * @param string $operator
      *
      * @return self
@@ -192,7 +192,7 @@ interface QueryBuilderInterface
     /**
      * Specifies values for an insert query indexed by column names.
      *
-     * @param array $values
+     * @param array<string, scalar> $values
      *
      * @return self
      */
