@@ -23,6 +23,24 @@ interface QueryBuilderInterface
     public function select(string ...$columns): self;
 
     /**
+     * Sets a table to be used for INSERT statement.
+     *
+     * @param string $table
+     *
+     * @return self
+     */
+    public function insert(string $table): self;
+
+    /**
+     * Sets a table to be used for DELETE statement.
+     *
+     * @param string $table
+     *
+     * @return self
+     */
+    public function delete(string $table): self;
+
+    /**
      * Sets the query as DISTINCT or not.
      *
      * @param bool $distinct

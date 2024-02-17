@@ -32,7 +32,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Expression::class)]
 #[CoversClass(QueryBuilder::class)]
 #[\PHPUnit\Framework\Attributes\Group('unit tests')]
-class QueryBuilderSelectTest extends TestCase
+class QueryBuilderTest extends TestCase
 {
     /** @var \Charon\Db\Connection&\PHPUnit\Framework\MockObject\MockObject $conn */
     private Connection $conn;
@@ -203,5 +203,58 @@ class QueryBuilderSelectTest extends TestCase
                     . 'GROUP BY u.id HAVING COUNT(u.name) > 1 AND COUNT(p.id) > 1',
             $query
         );
+    }
+
+    public function testInsert(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->insert('users')
+            ->values(
+                [
+                    'name' => "'John'",
+                    'surname' => "'Doe'"
+                ]
+            )
+            ->compile();
+
+        self::assertEquals('INSERT INTO users (name, surname) VALUES (\'John\', \'Doe\')', $query);
+    }
+
+    public function testInsertWithPlaceholder(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->insert('users')
+            ->values(
+                [
+                    'name' => '?',
+                    'surname' => '?'
+                ]
+            )
+            ->compile();
+
+        self::assertEquals('INSERT INTO users (name, surname) VALUES (?, ?)', $query);
+    }
+
+    public function testSimpleDelete(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->delete('users')
+            ->compile();
+
+        self::assertEquals('DELETE FROM users', $query);
+    }
+
+    public function testDeleteWithWhere(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->delete('users')
+            ->where('id', 1)
+            ->compile();
+
+        self::assertEquals('DELETE FROM users WHERE id = 1', $query);
     }
 }

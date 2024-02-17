@@ -76,8 +76,21 @@ class QueryBuilder implements QueryBuilderInterface
         return $this;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function insert(string $table): self {
         $this->queryType = QueryType::INSERT;
+        $this->table = new From($table);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete(string $table): self {
+        $this->queryType = QueryType::DELETE;
         $this->table = new From($table);
 
         return $this;
@@ -235,7 +248,8 @@ class QueryBuilder implements QueryBuilderInterface
     public function compile(): string {
         return match ($this->queryType) {
             QueryType::SELECT => $this->compileSelect(),
-            QueryType::INSERT => $this->compileInsert()
+            QueryType::INSERT => $this->compileInsert(),
+            QueryType::DELETE => $this->compileDelete(),
         };
     }
 
@@ -296,5 +310,21 @@ class QueryBuilder implements QueryBuilderInterface
             \implode(', ', \array_keys($this->values)),
             \implode(', ', $this->values)
         );
+    }
+
+    /**
+     * Compiles the DELETE Statement.
+     *
+     * @return string
+     */
+    public function compileDelete(): string {
+        $parts = ['DELETE FROM'];
+        $parts[] = $this->table;
+
+        if (\count($this->conditions) > 0) {
+            $parts[] = 'WHERE'. \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+        }
+
+        return \implode(' ', $parts);
     }
 }
