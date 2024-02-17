@@ -335,7 +335,7 @@ class QueryBuilder implements QueryBuilderInterface
         }
 
         if (\count($this->conditions) > 0) {
-            $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+            $parts[] = 'WHERE' . $this->removeLogicalOperatorFromBeginning($this->conditions);
         }
 
         if (\count($this->groups) > 0) {
@@ -343,7 +343,7 @@ class QueryBuilder implements QueryBuilderInterface
         }
 
         if (\count($this->having) > 0) {
-            $parts[] = 'HAVING' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->having), 1);
+            $parts[] = 'HAVING' . $this->removeLogicalOperatorFromBeginning($this->having);
         }
 
         if (\count($this->orders) > 0) {
@@ -395,7 +395,7 @@ class QueryBuilder implements QueryBuilderInterface
         $parts[] = $this->table;
 
         if (\count($this->conditions) > 0) {
-            $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+            $parts[] = 'WHERE' . $this->removeLogicalOperatorFromBeginning($this->conditions);
         }
 
         if ($this->limit !== null) {
@@ -428,9 +428,20 @@ class QueryBuilder implements QueryBuilderInterface
         }
 
         if (\count($this->conditions) > 0) {
-            $parts[] = 'WHERE' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->conditions), 1);
+            $parts[] = 'WHERE' . $this->removeLogicalOperatorFromBeginning($this->conditions);
         }
 
         return \implode(' ', $parts);
+    }
+
+    /**
+     * Removes a logical operator from beginning.
+     *
+     * @param Condition[]|Expression[] $parts
+     *
+     * @return string
+     */
+    private function removeLogicalOperatorFromBeginning(array $parts): string {
+        return (string) \preg_replace('/AND|OR/i', '', \implode(' ', $parts), 1);
     }
 }
