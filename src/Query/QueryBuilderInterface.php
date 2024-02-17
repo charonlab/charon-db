@@ -107,7 +107,6 @@ interface QueryBuilderInterface
      */
     public function rightJoin(string $fromAlias, string $table, string $alias, ?string $on = null): self;
 
-
     /**
      * Adds a grouping expression over the result of the query.
      *
@@ -116,6 +115,33 @@ interface QueryBuilderInterface
      * @return self
      */
     public function groupBy(string $column): self;
+
+    /**
+     * Adds a having expression to the query.
+     *
+     * @param string $expression
+     *
+     * @return self
+     */
+    public function having(string $expression): self;
+
+    /**
+     * Adds a OR having expression to the query.
+     *
+     * @param string $expression
+     *
+     * @return self
+     */
+    public function orHaving(string $expression): self;
+
+    /**
+     * Adds a AND having expression to the query.
+     *
+     * @param string $expression
+     *
+     * @return self
+     */
+    public function andHaving(string $expression): self;
 
     /**
      * Adds an ordering expression to the result of the query.

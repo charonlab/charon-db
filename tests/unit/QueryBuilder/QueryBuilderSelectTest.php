@@ -14,6 +14,7 @@ namespace Charon\Test\Unit\QueryBuilder;
 use Charon\Db\Connection;
 use Charon\Db\Query\Clause\Column;
 use Charon\Db\Query\Clause\Condition;
+use Charon\Db\Query\Clause\Expression;
 use Charon\Db\Query\Clause\From;
 use Charon\Db\Query\Clause\Group;
 use Charon\Db\Query\Clause\Join;
@@ -28,6 +29,7 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Join::class)]
 #[CoversClass(Group::class)]
 #[CoversClass(Order::class)]
+#[CoversClass(Expression::class)]
 #[CoversClass(QueryBuilder::class)]
 #[\PHPUnit\Framework\Attributes\Group('unit tests')]
 class QueryBuilderSelectTest extends TestCase
@@ -148,6 +150,45 @@ class QueryBuilderSelectTest extends TestCase
 
         self::assertEquals(
             'SELECT u.id, u.name FROM users AS u LEFT JOIN posts p ON u.id = p.id WHERE p.id = 1',
+            $query
+        );
+    }
+
+    public function testSelectWithHaving(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->leftJoin('u', 'posts', 'p', 'u.id = p.id')
+            ->groupBy('u.id')
+            ->having('COUNT(p.id) > 1')
+            ->compile();
+
+        self::assertEquals(
+            'SELECT u.id, u.name FROM users AS u '
+                    . 'LEFT JOIN posts p ON u.id = p.id '
+                    . 'GROUP BY u.id HAVING COUNT(p.id) > 1',
+            $query
+        );
+    }
+
+    public function testSelectWithAndHaving(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('u.id', 'u.name')
+            ->from('users', 'u')
+            ->leftJoin('u', 'posts', 'p', 'u.id = p.id')
+            ->groupBy('u.id')
+            ->having('COUNT(u.name) > 1')
+            ->andHaving('COUNT(p.id) > 1')
+            ->compile();
+
+        self::assertEquals(
+            'SELECT u.id, u.name FROM users AS u '
+                    . 'LEFT JOIN posts p ON u.id = p.id '
+                    . 'GROUP BY u.id HAVING COUNT(u.name) > 1 AND COUNT(p.id) > 1',
             $query
         );
     }

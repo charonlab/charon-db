@@ -14,6 +14,7 @@ namespace Charon\Db\Query;
 use Charon\Db\Connection;
 use Charon\Db\Query\Clause\Column;
 use Charon\Db\Query\Clause\Condition;
+use Charon\Db\Query\Clause\Expression;
 use Charon\Db\Query\Clause\Group;
 use Charon\Db\Query\Clause\Join;
 use Charon\Db\Query\Clause\Order;
@@ -37,6 +38,8 @@ class QueryBuilder implements QueryBuilderInterface
 
     /** @var \Charon\Db\Query\Clause\Group[] $groups */
     private array $groups = [];
+    /** @var \Charon\Db\Query\Clause\Expression[] $having */
+    private array $having = [];
 
     /** @var \Charon\Db\Query\Clause\Order[] $orders */
     private array $orders = [];
@@ -147,6 +150,33 @@ class QueryBuilder implements QueryBuilderInterface
     /**
      * @inheritDoc
      */
+    public function having(string $expression): self {
+        $this->having = [];
+        $this->having[] = new Expression('AND', $expression);
+
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function orHaving(string $expression): self {
+        $this->having[] = new Expression('OR', $expression);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function andHaving(string $expression): self {
+        $this->having[] = new Expression('AND', $expression);
+        return $this;
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function orderBy(string $column, string $direction = 'ASC'): self {
         $this->orders[] = new Order($column, $direction);
         return $this;
@@ -205,6 +235,10 @@ class QueryBuilder implements QueryBuilderInterface
 
         if (\count($this->groups) > 0) {
             $parts[] = 'GROUP BY ' . \implode(', ', $this->groups);
+        }
+
+        if (\count($this->having) > 0) {
+            $parts[] = 'HAVING' . \preg_replace('/AND|OR/i', '', \implode(' ', $this->having), 1);
         }
 
         if (\count($this->orders) > 0) {
