@@ -23,6 +23,7 @@ use Charon\Db\Query\Clause\From;
 class QueryBuilder implements QueryBuilderInterface
 {
     private QueryType $queryType = QueryType::SELECT;
+    private bool $distinct = false;
 
     /** @var \Charon\Db\Query\Clause\Column[] $columns */
     private array $columns = [];
@@ -66,6 +67,14 @@ class QueryBuilder implements QueryBuilderInterface
             $this->addColumn($column);
         }
 
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function distinct(bool $distinct = true): self {
+        $this->distinct = $distinct;
         return $this;
     }
 
@@ -215,6 +224,11 @@ class QueryBuilder implements QueryBuilderInterface
      */
     private function compileSelect(): string {
         $parts = ['SELECT'];
+
+        if ($this->distinct) {
+            $parts[] = 'DISTINCT';
+        }
+
         $parts[] = \implode(', ', $this->columns);
 
         if (\count($this->tables) > 0) {

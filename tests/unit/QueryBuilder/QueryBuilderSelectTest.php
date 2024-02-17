@@ -55,6 +55,18 @@ class QueryBuilderSelectTest extends TestCase
         self::assertEquals('SELECT id, name FROM users', $query);
     }
 
+    public function testBasicSelectDistinct(): void {
+        $qb = new QueryBuilder($this->conn);
+
+        $query = $qb
+            ->select('id', 'name')
+            ->distinct()
+            ->from('users')
+            ->compile();
+
+        self::assertEquals('SELECT DISTINCT id, name FROM users', $query);
+    }
+
     public function testSelectWithAliases(): void {
         $qb = new QueryBuilder($this->conn);
 

@@ -23,6 +23,15 @@ interface QueryBuilderInterface
     public function select(string ...$columns): self;
 
     /**
+     * Sets the query as DISTINCT or not.
+     *
+     * @param bool $distinct
+     *
+     * @return self
+     */
+    public function distinct(bool $distinct = true): self;
+
+    /**
      * Adds a table to the FROM clause.
      *
      * @param string $table
