@@ -11,6 +11,8 @@
 
 namespace Charon\Db\Query;
 
+use Charon\Db\Adapter\ResultSetInterface;
+
 interface QueryBuilderInterface
 {
     /**
@@ -235,4 +237,13 @@ interface QueryBuilderInterface
      * @return string
      */
     public function addColumn(string $column, ?string $alias = null): string;
+
+    /**
+     * Executes a compiled sql query.
+     *
+     * @param array $parameters
+     *
+     * @return \Charon\Db\Adapter\ResultSetInterface
+     */
+    public function execute(array $parameters = []): ResultSetInterface;
 }

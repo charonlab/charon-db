@@ -11,6 +11,7 @@
 
 namespace Charon\Db\Query;
 
+use Charon\Db\Adapter\ResultSetInterface;
 use Charon\Db\Connection;
 use Charon\Db\Query\Clause\Column;
 use Charon\Db\Query\Clause\Condition;
@@ -298,6 +299,13 @@ class QueryBuilder implements QueryBuilderInterface
             QueryType::DELETE => $this->compileDelete(),
             QueryType::UPDATE => $this->compileUpdate(),
         };
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function execute(array $parameters = []): ResultSetInterface {
+        return $this->connection->query($this->compile(), $parameters);
     }
 
     /**
