@@ -1,18 +1,18 @@
-## charon/charon-db
+## charonlab/charon-db
 
 The charon-db is a Database Abstraction Layer offers an object-oriented API.
 
-## Documentation
-
-Documentation is at [docs](docs/index.md)
-
 ## Installation
 
-Run the following to install this library:
+Use the composer to install:
 
 ```bash
 $ composer require charonlab/charon-db
 ```
+
+## Documentation
+
+Documentation is at [docs](docs/index.md)
 
 ## Support
 
