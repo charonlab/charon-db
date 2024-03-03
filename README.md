@@ -1,6 +1,12 @@
-## charonlab/charon-db
+# charonlab/charon-db
 
-The charon-db for PHP is a comprehensive and performant library designed to simplify database interactions in PHP applications.
+[![PHP Version Require](https://poser.pugx.org/charonlab/charon-db/require/php)](https://packagist.org/packages/charonlab/charon-db)
+[![Latest Stable Version](https://poser.pugx.org/charonlab/charon-db/v/stable)](https://packagist.org/packages/charonlab/charon-db)
+[![Continuous Integration](https://github.com/charonlab/charon-db/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/charonlab/charon-db/actions)
+[![Total Downloads](https://poser.pugx.org/charonlab/charon-db/downloads)](https://packagist.org/charonlab/charon-db)
+[![License](https://poser.pugx.org/charonlab/charon-db/license.svg)](https://packagist.org/packages/charonlab/charon-db)
+
+The **charon-db** for PHP is a comprehensive and performant library designed to simplify database interactions in PHP applications.
 It provides a robust SQL Query Builder and an intuitive Object-Oriented API, empowering developers to efficiently
 manage database operations while maintaining code readability.
 
@@ -27,6 +33,6 @@ Documentation is at [docs](docs/index.md)
 
 ## License
 
-The charonlab/charon-db is open-sourced software licensed under the [MIT](LICENSE.md)
+The MIT License (MIT). Please see [License](LICENSE.md) for more information.
 
 

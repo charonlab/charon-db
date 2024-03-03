@@ -1,6 +1,6 @@
 {
   "name": "charonlab/charon-db",
-  "description": "An lightweight database abstraction layer (DBAL) library.",
+  "description": "A high-performance PHP library offering a powerful SQL Query Builder and Object-Oriented API for streamlined database interactions.",
   "license": "MIT",
   "keywords": [
     "dal",
@@ -8,7 +8,7 @@
     "dbal"
   ],
   "require": {
-    "php": "~8.2.0 || ~8.3.0",
+    "php": ">=8.2",
     "ext-pdo": "*",
     "nuldark/stdlib": "^2.0.0"
   },
