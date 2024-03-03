@@ -2,7 +2,8 @@
 
 [![PHP Version Require](https://poser.pugx.org/charonlab/charon-db/require/php)](https://packagist.org/packages/charonlab/charon-db)
 [![Latest Stable Version](https://poser.pugx.org/charonlab/charon-db/v/stable)](https://packagist.org/packages/charonlab/charon-db)
-[![Continuous Integration](https://github.com/charonlab/charon-db/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/charonlab/charon-db/actions)
+[![tests](https://github.com/charonlab/charon-db/actions/workflows/tests.yml/badge.svg)](https://github.com/charonlab/charon-db/actions)
+[![static analysis](https://github.com/charonlab/charon-db/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/charonlab/charon-db/actions)
 [![Total Downloads](https://poser.pugx.org/charonlab/charon-db/downloads)](https://packagist.org/charonlab/charon-db)
 [![License](https://poser.pugx.org/charonlab/charon-db/license.svg)](https://packagist.org/packages/charonlab/charon-db)
 

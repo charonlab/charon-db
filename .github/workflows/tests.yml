@@ -1,0 +1,70 @@
+name: "Tests"
+
+on:
+  pull_request:
+    branches:
+      - "*.x"
+    paths:
+      - .github/workflows/tests.yml
+      - composer.*
+      - src/**
+      - tests/**
+      - phpunit.xml.dist
+  push:
+    branches:
+      - "*.x"
+    paths:
+      - .github/workflows/tests.yml
+      - composer.*
+      - src/**
+      - tests/**
+      - phpunit.xml.dist
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  fail-fast: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: xdebug
+          php-version: '8.2'
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Run tests
+        run: vendor/bin/phpunit --colors=always --coverage-clover=coverage.xml || true
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: charonlab/charon-db
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          args: >
+            -Dsonar.organization=charonlab
+            -Dsonar.projectKey=charonlab_charon-db
+            -Dsonar.php.coverage.reportPaths=coverage.xml
+            -Dsonar.sources=src/
+            -Dsonar.test.exclusions=tests/**
+            -Dsonar.tests=tests/
+            -Dsonar.verbose=true
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
