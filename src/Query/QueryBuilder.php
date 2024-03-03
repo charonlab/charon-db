@@ -185,7 +185,7 @@ class QueryBuilder implements QueryBuilderInterface
         string|float|int|array $value,
         string $operator = '=',
     ): self {
-        $this->conditions[] = new Condition($column, $value, $operator, 'OR');
+        $this->conditions[] = new Condition($column, $value, $operator, 'AND');
         return $this;
     }
 
