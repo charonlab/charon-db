@@ -24,6 +24,8 @@ interface Driver
      *
      * @return Connection The database connection.
      *  The database connection.
+     *
+     * @throws \Charon\Db\Adapter\Exception\DriverException
      */
     public function connect(
         #[\SensitiveParameter] array $params

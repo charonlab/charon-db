@@ -11,6 +11,8 @@
 
 namespace Charon\Db\Adapter\Profiler;
 
+use Charon\Db\Exception\RuntimeException;
+
 /**
  * @psalm-import-type QueryLog from \Charon\Db\Adapter\Profiler\ProfilerInterface
  */
@@ -50,7 +52,7 @@ class Profiler implements ProfilerInterface
                 __FUNCTION__
             );
 
-            throw new \RuntimeException($reason);
+            throw new RuntimeException($reason);
         }
 
         $current = $this->queryLogs[$this->currentIndex];
