@@ -11,8 +11,9 @@
 
 namespace Charon\Db\Adapter\Driver\PDO;
 
-use Charon\Db\Adapter\Driver\Driver as DriverInterface;
 use Charon\Db\Adapter\Driver\Connection as ConnectionInterface;
+use Charon\Db\Adapter\Driver\Driver as DriverInterface;
+use Charon\Db\Adapter\Exception\DriverException;
 
 final readonly class Driver implements DriverInterface
 {
@@ -33,7 +34,7 @@ final readonly class Driver implements DriverInterface
                 password:$params['password'] ?? null
             );
         } catch (\PDOException $exc) {
-            throw $exc;
+            throw new DriverException($exc->getMessage(), (int) $exc->getCode(), $exc);
         }
 
         return new Connection(

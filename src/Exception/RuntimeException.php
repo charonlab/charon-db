@@ -9,8 +9,8 @@
  * of the MIT license. See the LICENSE.md file for details.
  */
 
-namespace Charon\Db\Adapter\Exception;
+namespace Charon\Db\Exception;
 
-class UnsupportedDriverException extends \InvalidArgumentException
+class RuntimeException extends \RuntimeException
 {
 }

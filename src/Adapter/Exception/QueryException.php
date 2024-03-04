@@ -11,7 +11,9 @@
 
 namespace Charon\Db\Adapter\Exception;
 
-class QueryException extends \RuntimeException
+use Charon\Db\Exception\RuntimeException;
+
+class QueryException extends RuntimeException
 {
     protected string $sql;
     protected array $bindings;

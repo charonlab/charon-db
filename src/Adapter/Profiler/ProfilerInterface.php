@@ -40,7 +40,7 @@ interface ProfilerInterface
      * @return self
      *  Provides a fluent interface.
      *
-     * @throws \RuntimeException
+     * @throws \Charon\Db\Exception\RuntimeException
      */
     public function stop(): self;
 

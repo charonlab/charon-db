@@ -11,6 +11,6 @@
 
 namespace Charon\Db\Adapter\Exception;
 
-class UnsupportedDriverException extends \InvalidArgumentException
+class DriverException extends \Exception
 {
 }

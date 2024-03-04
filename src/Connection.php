@@ -14,7 +14,7 @@ namespace Charon\Db;
 use Charon\Db\Adapter\Driver\Connection as DriverConnection;
 use Charon\Db\Adapter\Driver\Driver;
 use Charon\Db\Adapter\Driver\Statement;
-use Charon\Db\Adapter\Exception\MissingOptionException;
+use Charon\Db\Adapter\Exception\MissingDriverException;
 use Charon\Db\Adapter\Exception\NoActiveTransactionException;
 use Charon\Db\Adapter\Exception\QueryException;
 use Charon\Db\Adapter\Exception\UnsupportedDriverException;
@@ -22,6 +22,7 @@ use Charon\Db\Adapter\Profiler\Profiler;
 use Charon\Db\Adapter\Profiler\ProfilerInterface;
 use Charon\Db\Adapter\ResultSet;
 use Charon\Db\Adapter\ResultSetInterface;
+use Charon\Db\Exception\InvalidReturnException;
 use Charon\Db\Sql\ParameterType;
 
 /**
@@ -148,7 +149,7 @@ class Connection
                 ResultSetInterface::class
             );
 
-            throw new \RuntimeException($reason);
+            throw new InvalidReturnException($reason);
         }
 
         return $results;
@@ -282,12 +283,12 @@ class Connection
      * @return \Charon\Db\Adapter\Driver\Driver
      *  Returns a new Driver instance.
      *
-     * @throws \Charon\Db\Adapter\Exception\MissingOptionException
+     * @throws \Charon\Db\Adapter\Exception\MissingDriverException
      * @throws \Charon\Db\Adapter\Exception\UnsupportedDriverException
      */
     private function createDriver(?string $driver): Driver {
         if ($driver === null) {
-            throw new MissingOptionException("The option 'driver' is required.");
+            throw new MissingDriverException("The option 'driver' is required.");
         }
 
         $driverClass = match ($driver) {
