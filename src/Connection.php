@@ -128,7 +128,7 @@ class Connection
          * @return \Charon\Db\Adapter\ResultSetInterface
          */
         $executor = function (string $sql, array $bindings): ResultSetInterface {
-            if (\count($bindings) > 0) {
+            if (!empty($bindings)) {
                 $stmt = $this->prepare($sql);
 
                 $this->bindValues($stmt, $bindings);
@@ -162,7 +162,7 @@ class Connection
          * @return int|string
          */
         $executor = function (string $sql, array $bindings): int|string {
-            if (\count($bindings) > 0) {
+            if (!empty($bindings)) {
                 $stmt = $this->prepare($sql);
 
                 $this->bindValues($stmt, $bindings);
